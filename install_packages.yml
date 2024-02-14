@@ -1,0 +1,9 @@
+---
+- name: install git with yum module
+  hosts: web-servers
+  become: true
+  tasks:
+  - name: install git with Ansible playbook
+    yum:
+      name: git
+      state: installed 

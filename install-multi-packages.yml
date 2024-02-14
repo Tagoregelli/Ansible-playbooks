@@ -1,0 +1,9 @@
+---
+- name: installmulti packages
+  hosts: web-servers
+  become: true
+  tasks: 
+  - name: install multi packages
+    yum:
+      name: ['git','gzip','telnet','tree']
+      state: installed

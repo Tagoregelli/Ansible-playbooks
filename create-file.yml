@@ -1,0 +1,10 @@
+---
+- name: create file with Ansible playbook
+  hosts: all
+  become: true
+  tasks: 
+  - name: create file with Ansible
+    file: 
+      path: /home/ansadmin/configfile
+      state: touch
+      

@@ -1,0 +1,32 @@
+---
+- name: setup tomcat -linux and ubuntu servers
+  hosts: all
+  become: true
+  tasks:
+  - name: install java with linux servers
+    yum:
+      name: java
+      state: installed
+    when: ansible_os_family=="RedHat"
+  - name: install java on ubuntu servers
+    apt: 
+      name: default-jdk
+      state: present 
+    when: ansible_os_family=="Debian"
+  - name: download tomcat apache
+    get_url:
+      url: https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.80/bin/apache-tomcat-9.0.80.tar.gz
+      dest: /opt 
+  - name: unzip the file
+    unarchive:
+      src: /opt/apache-tomcat-9.0.80.tar.gz      
+      dest: /opt 
+      remote_src: yes
+  - name: file permissions
+    file: 
+      path: /opt/apache-tomcat-9.0.80/bin/startup.sh
+      mode: 0777
+  - name: run shell script
+    shell: nohup ./startup.sh 
+    args: 
+      chdir: /opt/apache-tomcat-9.0.80/bin

@@ -1,0 +1,9 @@
+---
+- name: create a directory with Ansible
+  hosts: all
+  become: true
+  tasks:
+  - name: creare a directory
+    file: 
+      path: /home/ansadmin/configdir
+      state: directory
